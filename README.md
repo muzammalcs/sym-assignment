@@ -2,6 +2,7 @@
 Symfony application with 2 microservices that communicate via message bus.
 
 There two Symfony projects:
+
 **1- users**
 **2- notifications**
 
