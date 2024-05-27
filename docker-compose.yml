@@ -1,0 +1,72 @@
+version: '3.8'
+
+services:
+    users:
+        build:
+            context: ./users
+        container_name: users
+        volumes:
+            - ./users:/var/www/html
+        environment:
+            - APP_ENV=dev
+            - COMPOSER_ALLOW_SUPERUSER=1
+        depends_on:
+            - db
+        ports:
+            - "9001:80"
+        networks:
+            - symfony-network
+    notifications:
+        build:
+            context: ./notifications
+        container_name: notifications
+        volumes:
+            - ./notifications:/var/www/html
+        environment:
+            - APP_ENV=dev
+            - COMPOSER_ALLOW_SUPERUSER=1
+        depends_on:
+            - db
+        ports:
+            - "9002:80"
+        networks:
+            - symfony-network
+
+    db:
+        image: mysql:8.0
+        command: ['--character-set-server=utf8mb4', '--collation-server=utf8mb4_unicode_ci','--default-authentication-plugin=mysql_native_password']
+        environment:
+            MYSQL_ROOT_PASSWORD: root
+            MYSQL_DATABASE: symfony
+            MYSQL_USER: symfony
+            MYSQL_PASSWORD: symfony
+        ports:
+            - "3306:3306"
+        volumes:
+            - db_data:/var/lib/mysql
+
+    phpmyadmin:
+        image: phpmyadmin/phpmyadmin
+        links: 
+            - db:db
+        ports:
+            - 8000:80
+        environment:
+            MYSQL_USER: symfony
+            MYSQL_PASSWORD: symfony
+            MYSQL_ROOT_PASSWORD: symfony
+
+    rabbitmq:
+        image: rabbitmq:3-management
+        ports:
+            - "5672:5672"
+            - "15672:15672"
+        networks:
+            - symfony-network
+
+networks:
+    symfony-network:
+        driver: bridge
+
+volumes:
+    db_data:
