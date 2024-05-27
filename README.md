@@ -2,7 +2,7 @@
 Symfony application with 2 microservices that communicate via message bus.
 
 There two Symfony projects:
-**users
+**users and
 notifications**
 
 I am use RabbitMQ as the message broker.
