@@ -2,10 +2,12 @@
 Symfony application with 2 microservices that communicate via message bus.
 
 There two Symfony projects:
-**users
-notifications**
 
-I am use RabbitMQ as the message broker.
+**1- users**
+
+**2- notifications**
+
+I am useing RabbitMQ as the message broker.
 
 Docker file is included. 
 
