@@ -5,6 +5,8 @@ There two Symfony projects:
 **users
 notifications**
 
+I am use RabbitMQ as the message broker.
+
 Docker file is included. 
 
 **Steps to run this assiggnment:**
@@ -16,8 +18,12 @@ Docker file is included.
 **Testing the Application**
 You can now test the application by sending a POST request to the "users" service:
 
-curl -X POST http://localhost:8000/users \
+curl -X POST http://localhost:9001/public/users \
     -H "Content-Type: application/json" \
     -d '{"email": "test@example.com", "firstName": "John", "lastName": "Doe"}'
 
 Check the log files in users-service/var/log/users.log and notifications-service/var/log/notifications.log to see the logged data.
+
+RabitMQ url: http://localhost:15672/
+user: guest
+pass: guest
