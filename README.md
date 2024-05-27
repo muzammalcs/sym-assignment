@@ -7,7 +7,7 @@ There two Symfony projects:
 
 **2- notifications**
 
-I am use RabbitMQ as the message broker.
+I am useing RabbitMQ as the message broker.
 
 Docker file is included. 
 
