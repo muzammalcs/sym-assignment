@@ -29,6 +29,16 @@ class UserController extends AbstractController
     {
         $data = json_decode($request->getContent(), true);
 
+        if (empty($data['email'])) {
+            return $this->json(['errors' => 'Email is required'], Response::HTTP_BAD_REQUEST);
+        }
+        if (empty($data['firstName'])) {
+            return $this->json(['errors' => 'First name is required'], Response::HTTP_BAD_REQUEST);
+        }
+        if (empty($data['lastName'])) {
+            return $this->json(['errors' => 'Last name is required'], Response::HTTP_BAD_REQUEST);
+        }
+
         $user = new User();
         $user->email = $data['email'];
         $user->firstName = $data['firstName'];
